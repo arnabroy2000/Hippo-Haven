@@ -11,6 +11,7 @@ import { AuthCredentialsValidator, TAuthCredentialsValidator } from '@/lib/valid
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { cn } from '@/lib/utils'
+import { trpc } from '@/trpc/client'
 
 const page = () => {
     const {
@@ -21,6 +22,8 @@ const page = () => {
         resolver: zodResolver(AuthCredentialsValidator),
     })
     
+    const {data} = trpc.auth.useQuery()
+
     const onSubmit = ({
         email,
         password,
